@@ -1,5 +1,4 @@
-import React from 'react'
-import axios from 'axios'
+import axios from 'axios';
 
 const url = "https://jsonplaceholder.typicode.com";
 const newUrl = "https://625d83a14c36c753577625a4.mockapi.io/";
@@ -9,17 +8,28 @@ const newUrl = "https://625d83a14c36c753577625a4.mockapi.io/";
 export const Api=async(id)=>{
     let changeableUrl;
     if(id){
-        changeableUrl=`https://jsonplaceholder.typicode.com/posts/${id}`;
+        changeableUrl=`${newUrl}/posts/${id}`;
     }
     else{
-        changeableUrl=`https://jsonplaceholder.typicode.com/posts`;
+        changeableUrl=`${newUrl}/posts`;
     }
-    const fetchPosts = await axios.get(newUrl + "posts");
+    const fetchPosts = await axios.get(changeableUrl);
     console.log(fetchPosts);
    const {data}=fetchPosts;
    return data;
 }
 
+export const updateLikes = async (id,data) => {
+   
+    const updateLikes = await axios.put(`${newUrl}/posts/${id}`, data);
+    if (updateLikes.status === 200) { 
+        return true;
+    }
+    else {
+        return false;
+    }
+    console.log(updateLikes);
+}
 //Fetching data of Users to display in single Page
 export const UserApi=async()=>{
     const userId=window.localStorage.getItem("userId");
@@ -43,9 +53,11 @@ export const CommentApi=async()=>{
 
 export const addNewPost = async (postData) => {
     try {
-        await axios.post(newUrl + "posts");
+        let response = await axios.post(newUrl + "posts",postData);
+        console.log(response);
+        return response["status"];
     }
     catch (err) {
-        
+        console.log("Error Ocurred", err);
     }
 }

@@ -1,15 +1,19 @@
 import React from 'react';
 import "./singlePost.css";
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Api, UserApi } from '../API/Api';
 import Comments from '../Comments/Comments';
 import Header from '../Header/Header';
 
 export default function SinglePost() {
     const [users,setusers]=useState({});
-    const [post,setpost]=useState({});
+    const [post, setpost] = useState({});
+    const location = useLocation();
+    const { state } = location;
+    const {postId}=state;
 
-    const postId=window.localStorage.getItem("postId");
+    // const postId=window.localStorage.getItem("postId");
 
     //Fetching User data
     useEffect(() => {

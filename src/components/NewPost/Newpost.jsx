@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React,{useState} from 'react';
 import Header from '../Header/Header';
+import { addNewPost } from '../API/Api';
 import "./newPost.css";
 
 export default function Newpost() {
@@ -27,23 +28,25 @@ export default function Newpost() {
     const handleSubmit=(event)=>{
         event.preventDefault();
         postData();
-        setuserId(0);
-        settitle("");
-        setbody("");
         
     }
     
     //Post Data
-    const postData=async()=>{
-        try{
-            const {data:post} = await axios.post("https://jsonplaceholder.typicode.com/posts",{
-                userId,
+    const postData = async () => {
+        const postDetails = {
+            userId,
                 title,
-                body
-            });
+            body,
+                createdAt: new Date()
         }
-        catch(err){
-            console.log("error",err)
+        let status = await addNewPost(postDetails);
+        if (status === 201) { 
+            setuserId(0);
+        settitle("");
+        setbody("");
+        }
+        else {
+            alert("Adding new post failed");
         }
     }
 
