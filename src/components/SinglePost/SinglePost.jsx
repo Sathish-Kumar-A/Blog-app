@@ -18,16 +18,14 @@ export default function SinglePost() {
     //Fetching User data
     useEffect(() => {
         assignUsersData();
+        getPostData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     const assignUsersData = async() =>{
         setusers(await UserApi())
     }
     
-    //Fetching single post data
-    useEffect(() => {
-        getPostData();
-    }, [])
     
     const getPostData = async () => {
         setpost(await Api(postId));

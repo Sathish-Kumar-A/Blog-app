@@ -102,9 +102,10 @@ export const Home=()=> {
                     })}
                 </div>
             :
-            <div className="d-flex justify-content-center col-10 mx-5 my-5">
-                <strong>Loading...</strong>
-                <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                <div className="d-flex justify-content-center col-10 mx-5 my-5">
+                    No feeds found
+                {/* <strong>Loading...</strong>
+                <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div> */}
             </div>}
 
         </div>

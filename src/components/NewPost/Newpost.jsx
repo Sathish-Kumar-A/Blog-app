@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React,{useState} from 'react';
 import Header from '../Header/Header';
 import { addNewPost } from '../API/Api';
@@ -37,7 +36,9 @@ export default function Newpost() {
             userId,
                 title,
             body,
-                createdAt: new Date()
+            createdAt: new Date(),
+            likes: 0,
+                liked: false
         }
         let status = await addNewPost(postDetails);
         if (status === 201) { 

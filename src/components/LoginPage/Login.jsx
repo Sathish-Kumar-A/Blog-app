@@ -33,7 +33,7 @@ export default function Login() {
                     if(x===userName){
                         userChecker= true;
                     }
-                    else if(x==users[users.length-1]){
+                    else if(x===users[users.length-1]){
                         users.push(userName);
                         userChecker= true;
                         

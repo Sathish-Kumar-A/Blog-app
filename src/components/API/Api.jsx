@@ -28,7 +28,6 @@ export const updateLikes = async (id,data) => {
     else {
         return false;
     }
-    console.log(updateLikes);
 }
 //Fetching data of Users to display in single Page
 export const UserApi=async()=>{
