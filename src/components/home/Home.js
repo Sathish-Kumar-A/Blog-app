@@ -16,7 +16,6 @@ export const Home=()=> {
     useEffect(()=>{
         collectData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-
     }, [forceRender]);
     
     const collectData = async() => {
