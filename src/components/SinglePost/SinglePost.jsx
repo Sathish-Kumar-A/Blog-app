@@ -47,9 +47,9 @@ export default function SinglePost() {
                     </div>
 
                     <div className="userDetails text-center">
-                        <h5 className="userInfo my-1"><i class="mx-3 text-muted fab fa-searchengin"></i>{users.website}</h5>
+                        <h5 className="userInfo my-1"><i className="mx-3 text-muted fab fa-searchengin"></i>{users.website}</h5>
                         <h5 className="userInfo my-1"><i className="mx-3 text-muted fas fa-envelope-open-text"></i>{users.email}</h5>
-                        <h5 className="userInfo my-1"><i class="mx-3 text-muted fas fa-phone-alt"></i>{users.phone}</h5>
+                        <h5 className="userInfo my-1"><i className="mx-3 text-muted fas fa-phone-alt"></i>{users.phone}</h5>
                     </div>
                     <hr className="container col-10" />
 

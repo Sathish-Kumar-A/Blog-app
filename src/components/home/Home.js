@@ -85,12 +85,12 @@ export const Home=()=> {
                         return(
                             <div className="card col-11 col-xs-11 col-sm-11 col-md-5 col-lg-3 cardBox" key={post.id}>
 
-                                <span class="badge bg-light text-dark">{format(new Date(post.createdAt).getTime())}</span>
+                                <span className="badge bg-light text-dark">{format(new Date(post.createdAt).getTime())}</span>
 
                                 <div className="card-body">
                                     <h5 className="card-title text-primary" onClick={()=>sendPostId(post.id,post.userId)} style={{cursor:"pointer"}}>{post.title}</h5>
                                     <p className="card-text">{post.body}</p>
-                                    <span class="badge bg-info text-light">{post.likes}</span>
+                                    <span className="badge bg-info text-light">{post.likes}</span>
                                     {user==="true" ? <button className={`mx-3 btn ${post.liked?"btn-danger":"btn-success"}`} onClick={()=>btnChange(index)}>{post.liked?"UnVote":"UpVote"}</button>:<span></span>}
                                     
                                     <NavLink to="/comments" className="btn btn-primary my-3 mx-2">View Comments</NavLink>
@@ -102,9 +102,9 @@ export const Home=()=> {
                     })}
                 </div>
             :
-            <div class="d-flex justify-content-center col-10 mx-5 my-5">
+            <div className="d-flex justify-content-center col-10 mx-5 my-5">
                 <strong>Loading...</strong>
-                <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                <div className="spinner-border ms-auto" role="status" aria-hidden="true"></div>
             </div>}
 
         </div>
