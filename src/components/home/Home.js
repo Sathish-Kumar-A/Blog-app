@@ -15,6 +15,8 @@ export const Home=()=> {
     //setting the posts data in state and added states of button, button color to every post data
     useEffect(()=>{
         collectData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [forceRender]);
     
     const collectData = async() => {
