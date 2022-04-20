@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 const url = "https://jsonplaceholder.typicode.com";
-const newUrl = "https://625d83a14c36c753577625a4.mockapi.io/";
+const newUrl = "https://625d83a14c36c753577625a4.mockapi.io/posts";
 
 
 //Fetching data for posts and Single post
 export const Api=async(id)=>{
     let changeableUrl;
     if(id){
-        changeableUrl=`${newUrl}/posts/${id}`;
+        changeableUrl=`${newUrl}/${id}`;
     }
     else{
-        changeableUrl=`${newUrl}/posts`;
+        changeableUrl=newUrl;
     }
     const fetchPosts = await axios.get(changeableUrl);
     console.log(fetchPosts);
@@ -21,7 +21,7 @@ export const Api=async(id)=>{
 
 export const updateLikes = async (id,data) => {
    
-    const updateLikes = await axios.put(`${newUrl}/posts/${id}`, data);
+    const updateLikes = await axios.put(`${newUrl}/${id}`, data);
     if (updateLikes.status === 200) { 
         return true;
     }
@@ -38,21 +38,32 @@ export const UserApi=async()=>{
 }
 
 //Fetching data of comments for a post
-export const CommentApi=async()=>{
-    try{
-        const id=window.localStorage.getItem("postId");
-        const fetchCommentData=await axios.get(`${url}/posts/${id}/comments`)
-        const {data}=fetchCommentData;
-        return data;
+export const queryGetter=async(id,queryParameter)=>{
+    try {
+        const {data}= await axios.get(newUrl + "/" + id);
+        return data[queryParameter];
     }
-    catch(err){
-        console.log("Error Ocurred",err);
+    catch (err) {
+        console.log(err);
+        return false;
     }
 }
 
+export const addNewComment = async (id, newComment) => {
+    const body = {
+        comments:newComment
+    }
+    try {
+        const {data} = await axios.put(newUrl+"/" + id, body);
+        return data["comments"]
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
 export const addNewPost = async (postData) => {
     try {
-        let response = await axios.post(newUrl + "posts",postData);
+        let response = await axios.post(newUrl + "/",postData);
         console.log(response);
         return response["status"];
     }

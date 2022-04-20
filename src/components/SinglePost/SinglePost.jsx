@@ -10,8 +10,8 @@ export default function SinglePost() {
     const [users,setusers]=useState({});
     const [post, setpost] = useState({});
     const location = useLocation();
-    const { state } = location;
-    const {postId}=state;
+    const {pathname } = location;
+    const postId=pathname.split("/")[2];
 
     // const postId=window.localStorage.getItem("postId");
 
@@ -33,21 +33,21 @@ export default function SinglePost() {
 
     return (
         <div>
-            <Header />
-            {users && post ? 
+            <Header/>
+            {post ? 
             (<div className="singlePost">
                 <div>
 
                     <div className="userPhoto text-center my-4">
                         <i className="postProfilePhoto fas fa-user-circle"></i>
-                        <h3 className="text-primary my-2">@{users.username}</h3>
-                        <h3 className="text-warning my-2">{users.name}</h3>
+                        <h3 className="text-primary my-2">@anonymous_user</h3>
+                        <h3 className="text-warning my-2">Learner</h3>
                     </div>
 
                     <div className="userDetails text-center">
-                        <h5 className="userInfo my-1"><i className="mx-3 text-muted fab fa-searchengin"></i>{users.website}</h5>
-                        <h5 className="userInfo my-1"><i className="mx-3 text-muted fas fa-envelope-open-text"></i>{users.email}</h5>
-                        <h5 className="userInfo my-1"><i className="mx-3 text-muted fas fa-phone-alt"></i>{users.phone}</h5>
+                        <h5 className="userInfo my-1"><i className="mx-3 text-muted fab fa-searchengin"></i>blog.com</h5>
+                        <h5 className="userInfo my-1"><i className="mx-3 text-muted fas fa-envelope-open-text"></i>anonymous@blogs.com</h5>
+                        <h5 className="userInfo my-1"><i className="mx-3 text-muted fas fa-phone-alt"></i>0000007880</h5>
                     </div>
                     <hr className="container col-10" />
 

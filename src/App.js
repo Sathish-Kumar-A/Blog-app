@@ -23,13 +23,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/post" element={
+          <Route path="/post/:id" element={
             <Authenicate>
               <SinglePost />
             </Authenicate>}
           />
 
-          <Route path="/comments" element={
+          <Route path="/comments/:id" element={
             <Authenicate>
               <Comments />
             </Authenicate>}

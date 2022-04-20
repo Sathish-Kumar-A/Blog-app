@@ -34,17 +34,18 @@ export default function Newpost() {
     const postData = async () => {
         const postDetails = {
             userId,
-                title,
+            title,
             body,
             createdAt: new Date(),
             likes: 0,
-                liked: false
+            liked: false,
+            comments:[]
         }
         let status = await addNewPost(postDetails);
         if (status === 201) { 
             setuserId(0);
-        settitle("");
-        setbody("");
+            settitle("");
+            setbody("");
         }
         else {
             alert("Adding new post failed");

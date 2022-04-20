@@ -2,15 +2,19 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import { Api, updateLikes } from "../API/Api"
 import "./home.css"
-import { NavLink,useNavigate } from 'react-router-dom';
+import { NavLink,useNavigate,useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import { format } from 'timeago.js';
 
-export const Home=()=> {
+export const Home = () => {
     const [posts, setposts] = useState([]);
     const [forceRender, setForceRender] = useState(0);
     const navigate = useNavigate();
-    const user=window.localStorage.getItem("userLogin");
+    const user = window.localStorage.getItem("userLogin");
+    const location = useLocation();
+    const { pathname } = location;
+    const param = pathname.split("/")[1];
+    console.log(param)
 
     //setting the posts data in state and added states of button, button color to every post data
     useEffect(()=>{
@@ -24,7 +28,6 @@ export const Home=()=> {
         setposts(sort(fetchedData));
     }
 
-    //Changing of colour and text in Upvote button
     const btnChange = async(id) => {
         let data = posts[id];
         let response;
@@ -46,7 +49,6 @@ export const Home=()=> {
         }
     }
 
-    //Sorting according to upvotes
 
     function sort(posts){
         for(var x=1;x<posts.length;x++){
@@ -66,23 +68,20 @@ export const Home=()=> {
 
     //Storing postId and UserId in local storage for Api fetching purpose
     const sendPostId=(id,userId)=>{
-        navigate("/post",{state:{postId:id,userId:userId}});
+        navigate(`/post/${id}`,{state:{postId:id,userId:userId}});
+    }
+
+    const gotoCommentsPage = (id) => { 
+        navigate(`/comments/${id}`);
     }
 
     return (
         <div>
-            <Header />
+            <Header/>
             {posts.length ? 
 
                 <div className="posts">
                     {posts.map((post,index)=>{
-                        // let time;
-                        // if(index<24){
-                        //     time=index + " hours ago";
-                        // }
-                        // else if(index>24 && index<168){
-                        //     time=Math.floor(index/24) +" days ago"
-                        // }
                         return(
                             <div className="card col-11 col-xs-11 col-sm-11 col-md-5 col-lg-3 cardBox" key={post.id}>
 
@@ -92,9 +91,9 @@ export const Home=()=> {
                                     <h5 className="card-title text-primary" onClick={()=>sendPostId(post.id,post.userId)} style={{cursor:"pointer"}}>{post.title}</h5>
                                     <p className="card-text">{post.body}</p>
                                     <span className="badge bg-info text-light">{post.likes}</span>
-                                    {user==="true" ? <button className={`mx-3 btn ${post.liked?"btn-danger":"btn-success"}`} onClick={()=>btnChange(index)}>{post.liked?"UnVote":"UpVote"}</button>:<span></span>}
+                                    {user==="true" ? <button className={`mx-3 btn ${post.liked?"btn-danger":"btn-success"}`} onClick={()=>btnChange(index)}>{post.liked?"Unlike":"Like"}</button>:<span></span>}
                                     
-                                    <NavLink to="/comments" className="btn btn-primary my-3 mx-2">View Comments</NavLink>
+                                    <button className="btn btn-primary my-3 mx-2" onClick={()=>gotoCommentsPage(post.id)}>View Comments</button>
                                 </div>
 
                             </div>
