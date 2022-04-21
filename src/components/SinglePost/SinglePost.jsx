@@ -2,12 +2,12 @@ import React from 'react';
 import "./singlePost.css";
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Api, UserApi } from '../API/Api';
+import { Api} from '../API/Api';
 import Comments from '../Comments/Comments';
 import Header from '../Header/Header';
 
 export default function SinglePost() {
-    const [users,setusers]=useState({});
+    // const [users,setusers]=useState({});
     const [post, setpost] = useState({});
     const location = useLocation();
     const {pathname } = location;
@@ -17,14 +17,14 @@ export default function SinglePost() {
 
     //Fetching User data
     useEffect(() => {
-        assignUsersData();
+        // assignUsersData();
         getPostData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
-    const assignUsersData = async() =>{
-        setusers(await UserApi())
-    }
+    // const assignUsersData = async() =>{
+    //     setusers(await UserApi())
+    // }
     
     
     const getPostData = async () => {

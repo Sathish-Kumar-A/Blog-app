@@ -1,15 +1,13 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Header from '../Header/Header';
 import { addNewPost } from '../API/Api';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import "./newPost.css";
 
 export default function Newpost() {
-    const [userId,setuserId]=useState(0);
-    const [title,settitle]=useState("");
-    const [body, setbody] = useState("");
-    
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             userId: "",
@@ -29,31 +27,10 @@ export default function Newpost() {
     })
 
     console.log(formik.errors);
-    //Setting state value of userId during typing
-    const userIdChange=(event)=>{
-        setuserId(event.target.value);
-    }
-
-    //Setting state value of title during typing
-    const titleChange=(event)=>{
-        settitle(event.target.value);
-    }
-
-    //Setting state value of body during typing
-    const bodyChange=(event)=>{
-        setbody(event.target.value);
-    }
-    
-    //Posting data and setting data during submit
-    // const handleSubmit=(event)=>{
-    //     event.preventDefault();
-    //     postData();
-        
-    // }
     
     //Post Data
     const postData = async () => {
-        console.log("formik",formik.values);
+        // console.log("formik",formik.values);
         const postDetails = {
             ...formik.values,
             createdAt: new Date(),
@@ -63,9 +40,8 @@ export default function Newpost() {
         }
         let status = await addNewPost(postDetails);
         if (status === 201) { 
-            setuserId(0);
-            settitle("");
-            setbody("");
+            formik.resetForm();
+            navigate("/");
         }
         else {
             alert("Adding new post failed");

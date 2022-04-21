@@ -16,6 +16,7 @@ export default function Comments() {
     //Fetches Comment data from API
     useEffect(() => {
         getComments();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
 

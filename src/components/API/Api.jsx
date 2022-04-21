@@ -14,7 +14,6 @@ export const Api=async(id)=>{
         changeableUrl=newUrl;
     }
     const fetchPosts = await axios.get(changeableUrl);
-    console.log(fetchPosts);
    const {data}=fetchPosts;
    return data;
 }
